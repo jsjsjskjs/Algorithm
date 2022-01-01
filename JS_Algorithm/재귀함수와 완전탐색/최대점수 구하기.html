@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, ps, pt) {
+        let maxScore = Number.MIN_SAFE_INTEGER
+        let length = ps.length
+        let check = new Array(length).fill(0)
+        function DFS(num, timeSum) {
+          if (num === length) {
+            if (timeSum <= m) {
+              let scoreSum = 0
+              for (let n = 0; n < check.length; n++) {
+                if (check[n] === 1) scoreSum += ps[n]
+              }
+              if (scoreSum > maxScore) maxScore = scoreSum
+            }
+          } else {
+            check[num] = 1
+            DFS(num + 1, timeSum + pt[num])
+            check[num] = 0
+            DFS(num + 1, timeSum)
+          }
+        }
+        DFS(0, 0)
+        return maxScore
+      }
+
+      let ps = [10, 25, 15, 6, 7]
+      let pt = [5, 12, 8, 3, 4]
+      console.log(solution(20, ps, pt))
+      /*
+      아래와 같이 더 간결하게 m을 넘어버리면 바로 탈출할 수 있도록
+      function solution(m, ps, pt) {
+        let maxScore = Number.MIN_SAFE_INTEGER
+        let length = ps.length
+        function DFS(num, time, sum) {
+          if(time > m) return
+          if (num === length) {
+            maxScore = Math.max(maxScore, sum)      
+          } else {
+            DFS(num + 1, time + pt[num], sum + ps[num])
+            DFS(num + 1, time, sum)
+          }
+        }
+        DFS(0, 0, 0)
+        return maxScore
+      }
+
+      let ps = [10, 25, 15, 6, 7]
+      let pt = [5, 12, 8, 3, 4]
+      console.log(solution(20, ps, pt))
+      */
+    </script>
+  </body>
+</html>
