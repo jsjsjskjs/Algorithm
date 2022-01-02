@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, arr) {
+        let answer = Number.MAX_SAFE_INTEGER
+        let length = arr.length
+        function DFS(num, sum) {
+          if(sum > m) return
+          if(num >= answer) return
+          if(sum === m) {
+            answer = Math.min(answer, num)
+          } else {
+            //for문의 범위는 선택해야 하는 동전의 수만큼이다
+            for(let i=0; i<length; i++) {
+              DFS(num + 1, sum + arr[i])
+            }
+          }
+        }
+        DFS(0, 0)
+        return answer
+      }
+
+      let arr = [1, 2, 5]
+      console.log(solution(15, arr))
+    </script>
+  </body>
+</html>
