@@ -1,0 +1,29 @@
+<!-- @format -->
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        let answer = ''
+        function DFS(num) {
+          if(num > 7) return
+          else {
+            //answer += num // 전위순회
+            DFS(num*2)
+            answer += num // 중위순회
+            DFS(num*2+1)
+            //answer += num // 후휘순회
+          }
+        }
+        DFS(1)
+        return answer
+      }
+
+      console.log(solution(1))
+    </script>
+  </body>
+</html>
