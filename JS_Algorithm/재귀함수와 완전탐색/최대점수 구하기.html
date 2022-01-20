@@ -6,26 +6,18 @@
   <body>
     <script>
       function solution(m, ps, pt) {
+        let R = ps.length
         let maxScore = Number.MIN_SAFE_INTEGER
-        let length = ps.length
-        let check = new Array(length).fill(0)
-        function DFS(num, timeSum) {
-          if (num === length) {
-            if (timeSum <= m) {
-              let scoreSum = 0
-              for (let n = 0; n < check.length; n++) {
-                if (check[n] === 1) scoreSum += ps[n]
-              }
-              if (scoreSum > maxScore) maxScore = scoreSum
-            }
+        function DFS(num, sum, time) {
+          if(time > m) return
+          if(num === R) {
+            maxScore = Math.max(maxScore, sum)
           } else {
-            check[num] = 1
-            DFS(num + 1, timeSum + pt[num])
-            check[num] = 0
-            DFS(num + 1, timeSum)
+            DFS(num + 1, sum + ps[num], time + pt[num])
+            DFS(num + 1, sum, time)
           }
         }
-        DFS(0, 0)
+        DFS(0, 0, 0)
         return maxScore
       }
 

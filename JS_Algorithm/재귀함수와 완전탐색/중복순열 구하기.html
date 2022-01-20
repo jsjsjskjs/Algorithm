@@ -9,18 +9,8 @@
         let answer = []
         let bucket = new Array(m).fill(0)
         function DFS(num) {
-          if (num === m) {
-            //slice()를 사용하지 않으면 마지막 bucket 값으로 모두 같아진다
-            answer.push(bucket.slice())
-          } else {
-            for (let i = 1; i <= n; i++) {
-              bucket[num] = i
-              DFS(num + 1)
-            }
-          }
+          
         }
-        DFS(0)
-        return answer
       }
 
       console.log(solution(3, 2))
