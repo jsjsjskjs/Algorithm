@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, r) {
+        let check = Array.from( new Array(n+1), () => new Array(r+1).fill(0))
+        function DFS(a, b) {
+          if(check[a][b] !== 0) return check[a][b]
+          if(b === 0 || a === b) return 1
+          else {
+            return check[a][b] = DFS(a-1, b-1) + DFS(a-1, b)
+          }
+        }
+        return DFS(n, r)
+      }
+
+      console.log(solution(33, 19))
+    </script>
+  </body>
+</html>

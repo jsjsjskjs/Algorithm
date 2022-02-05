@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -7,10 +9,17 @@
     <script>
       function solution(n, m) {
         let answer = []
-        let bucket = new Array(m).fill(0)
-        function DFS(num) {
-          
+        function DFS(num, bucket) {
+          if (num === m) {
+            answer.push(bucket)
+          } else {
+            for (let i = 1; i < n + 1; i++) {
+              DFS(num + 1, [...bucket, i])
+            }
+          }
         }
+        DFS(0, [])
+        return answer
       }
 
       console.log(solution(3, 2))
